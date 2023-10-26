@@ -317,7 +317,7 @@ class OpencexExchange(ExchangePyBase):
             try:
                 channel = stream_message.get("kind", None)
 
-                if channel == CONSTANTS.OPENCEX_WS_ORDERS_CHANNEL:
+                if channel in [CONSTANTS.OPENCEX_WS_OPENED_ORDERS_CHANNEL, CONSTANTS.OPENCEX_WS_CLOSED_ORDERS_CHANNEL]:
                     for data in stream_message.get("results", []):
                         order_state = get_opencex_order_state(data)
                         exchange_order_id = str(data["id"])

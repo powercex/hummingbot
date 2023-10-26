@@ -67,7 +67,13 @@ class OpencexAPIUserStreamDataSource(UserStreamTrackerDataSource):
                 "command": "add_opened_orders",
                 "params": {}
             }
-            subscribe_orders_request: WSJSONRequest = WSJSONRequest(payload=payload)
+            subscribe_opened_orders_request: WSJSONRequest = WSJSONRequest(payload=payload)
+
+            payload = {
+                "command": "add_closed_orders",
+                "params": {}
+            }
+            subscribe_closed_orders_request: WSJSONRequest = WSJSONRequest(payload=payload)
 
             # payload = {
             #     "command": "add_user_trades",
@@ -78,7 +84,9 @@ class OpencexAPIUserStreamDataSource(UserStreamTrackerDataSource):
             async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_SUBSCRIPTION_LIMIT_ID):
                 await websocket_assistant.send(subscribe_account_request)
             async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_SUBSCRIPTION_LIMIT_ID):
-                await websocket_assistant.send(subscribe_orders_request)
+                await websocket_assistant.send(subscribe_opened_orders_request)
+            async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_SUBSCRIPTION_LIMIT_ID):
+                await websocket_assistant.send(subscribe_closed_orders_request)
             # async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_SUBSCRIPTION_LIMIT_ID):
             #     await websocket_assistant.send(subscribe_user_trades_request)
             self.logger().info("Subscribed to private account and orders channels...")
