@@ -233,6 +233,7 @@ class OpencexExchange(ExchangePyBase):
             is_auth_required=True,
             limit_id=CONSTANTS.OPENCEX_PLACE_ORDER_PATH,
         )
+        self.logger().warning(f"Created: {order_resp['id']}")
         return str(order_resp["id"]), self.current_timestamp
 
     async def _place_cancel(self, order_id: str, tracked_order: InFlightOrder):
@@ -255,6 +256,7 @@ class OpencexExchange(ExchangePyBase):
             if "open_order_cant_cancel" in str(e):
                 return True
             raise IOError(f"Error cancelling order {order_id}: {e}")
+        self.logger().warning(f"Place cancel: {tracked_order.exchange_order_id} - {order_id}")
         return True
 
     async def _get_last_traded_price(self, trading_pair: str) -> float:
@@ -354,6 +356,12 @@ class OpencexExchange(ExchangePyBase):
                                 exchange_order_id=str(data["id"]),
                             )
                             self._order_tracker.process_order_update(order_update=order_update)
+                            self.logger().warning(
+                                f"{updatable_order.client_order_id} - id:{exchange_order_id}, s:{order_state}, q:{data['quantity']}, ql:{data['quantity_left']}")
+                        else:
+                            self.logger().warning(
+                                f"N/A - id:{exchange_order_id}, s:{order_state}, q:{data['quantity']}, ql:{data['quantity_left']}")
+
 
                 elif channel == CONSTANTS.OPENCEX_WS_ACCOUNT_CHANNEL:
                     balance_dict = stream_message.get("balance", {})
