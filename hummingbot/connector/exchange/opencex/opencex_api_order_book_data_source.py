@@ -162,5 +162,6 @@ class OpencexAPIOrderBookDataSource(OrderBookTrackerDataSource):
         async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_CONNECTION_LIMIT_ID):
             await ws.connect(
                 ws_url=CONSTANTS.OPENCEX_WS_URI_PUBLIC,
+                ping_timeout=CONSTANTS.PING_TIMEOUT,
                 message_timeout=CONSTANTS.SECONDS_TO_WAIT_TO_RECEIVE_MESSAGE)
         return ws

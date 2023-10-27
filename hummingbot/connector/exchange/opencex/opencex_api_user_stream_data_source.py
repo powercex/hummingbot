@@ -36,6 +36,7 @@ class OpencexAPIUserStreamDataSource(UserStreamTrackerDataSource):
         async with self._api_factory.throttler.execute_task(limit_id=CONSTANTS.WS_CONNECTION_LIMIT_ID):
             await ws.connect(
                 ws_url=CONSTANTS.OPENCEX_WS_URI_PRIVATE,
+                ping_timeout=CONSTANTS.PING_TIMEOUT,
                 message_timeout=CONSTANTS.SECONDS_TO_WAIT_TO_RECEIVE_MESSAGE,
                 ws_headers=await self._auth.get_ws_authentication_headers(),
             )

@@ -5,7 +5,8 @@ from hummingbot.core.data_type.common import TradeType
 from hummingbot.core.data_type.in_flight_order import OrderState
 
 MAX_ID_LEN = 32
-SECONDS_TO_WAIT_TO_RECEIVE_MESSAGE = 30 * 0.8
+SECONDS_TO_WAIT_TO_RECEIVE_MESSAGE = 600
+PING_TIMEOUT = 20
 
 DEFAULT_DOMAIN = ""
 
