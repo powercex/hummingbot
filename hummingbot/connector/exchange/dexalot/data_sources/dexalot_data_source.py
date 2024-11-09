@@ -33,7 +33,7 @@ class DexalotClient:
         self.transaction_lock = Lock()
         self.balance_evm_params = {}
 
-        self.account: LocalAccount = Account.from_key(dexalot_api_secret)
+        #self.account: LocalAccount = Account.from_key(dexalot_api_secret)
 
         self.provider = CONSTANTS.DEXALOT_SUBNET_RPC_URL
         self._w3 = Web3(Web3.HTTPProvider(self.provider))
