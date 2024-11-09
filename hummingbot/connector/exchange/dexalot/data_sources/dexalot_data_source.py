@@ -39,7 +39,7 @@ class DexalotClient:
         self._w3 = Web3(Web3.HTTPProvider(self.provider))
         self.async_w3 = AsyncWeb3(AsyncWeb3.AsyncHTTPProvider(self.provider))
         self.async_w3.middleware_onion.inject(async_geth_poa_middleware, layer=0)
-        self.async_w3.eth.default_account = self.account.address
+        #self.async_w3.eth.default_account = self.account.address
         self.async_w3.strict_bytes_type_checking = False
 
         self.trade_pairs_manager = self.async_w3.eth.contract(address=DEXALOT_TRADEPAIRS_ADDRESS,
