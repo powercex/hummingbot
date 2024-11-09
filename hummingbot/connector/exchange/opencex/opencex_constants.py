@@ -12,7 +12,7 @@ DEFAULT_DOMAIN = ""
 
 # URLs
 
-OPENCEX_BASE_URL = "http://opencex:8080/"
+OPENCEX_BASE_URL = "https://powercex.com"
 
 # Doesn't include base URL as the tail is required to generate the signature
 
@@ -30,9 +30,9 @@ OPENCEX_BALANCE_PATH = '/api/public/v1/balance'
 OPENCEX_TRADE_FILLS_PATH = "/api/public/v1/matches"  # todo
 
 # WS
-OPENCEX_WS_BASE_DOMAIN = "opencex-wss:8000"
-OPENCEX_WS_URI_PUBLIC = f"ws://{OPENCEX_WS_BASE_DOMAIN}/wsapi/v1/live_notifications"
-OPENCEX_WS_URI_PRIVATE = f"ws://{OPENCEX_WS_BASE_DOMAIN}/wsapi/v1/live_notifications"
+OPENCEX_WS_BASE_DOMAIN = "powercex.com"
+OPENCEX_WS_URI_PUBLIC = f"wss://{OPENCEX_WS_BASE_DOMAIN}/wsapi/v1/live_notifications"
+OPENCEX_WS_URI_PRIVATE = f"wss://{OPENCEX_WS_BASE_DOMAIN}/wsapi/v1/live_notifications"
 
 
 OPENCEX_WS_ACCOUNT_CHANNEL = "balance"
