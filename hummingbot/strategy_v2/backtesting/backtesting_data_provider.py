@@ -42,6 +42,10 @@ class BacktestingDataProvider(MarketDataProvider):
             logger.error(f"Connector {connector_name} not found")
             raise ValueError(f"Connector {connector_name} not found")
 
+        if connector_name is "dexalot":
+            logger.error(f"Connector {connector_name} blocked")
+            raise ValueError(f"Connector {connector_name} blocked")
+            
         client_config_map = ClientConfigAdapter(ClientConfigMap())
         init_params = conn_setting.conn_init_parameters(
             trading_pairs=[],
