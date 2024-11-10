@@ -25,7 +25,7 @@ class OpencexAuth(AuthBase):
         if request.headers is not None:
             headers.update(request.headers)
 
-        timestamp = str(int(self.time_provider.time()))
+        timestamp = str(int(self.time_provider._time() * 1e3))
         headers.update(generate_signature_headers(self.api_key, self.secret_key, timestamp))
         request.headers = headers
 
@@ -39,6 +39,6 @@ class OpencexAuth(AuthBase):
         return request  # pass-through
 
     async def get_ws_authentication_headers(self) -> dict:
-        timestamp = str(int(self.time_provider.time()) + 1)
+        timestamp = str(int(self.time_provider._time() * 1e3) + 1)
         headers = generate_signature_headers(self.api_key, self.secret_key, timestamp)
         return headers
